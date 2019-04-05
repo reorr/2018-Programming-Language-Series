@@ -1,4 +1,5 @@
 from sly import Lexer
+from sys import *
 from sly import Parser
 
 class BasicLexer(Lexer):
@@ -8,12 +9,12 @@ class BasicLexer(Lexer):
     literals = { '=', '+', '-', '/', '*', '(', ')', ',', ';' }
 
     # Define tokens
-    IF = r'IF'
-    THEN = r'THEN'
-    ELSE = r'ELSE'
-    FOR = r'FOR'
+    IF = r'UPAMI'
+    THEN = r'SATULUNYA '
+    ELSE = r'SEDANGKEUN'
+    FOR = r'KEUR'
     FUN = r'FUN'
-    TO = r'TO'
+    TO = r'KA'
     ARROW = r'->'
     NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
     STRING = r'\".*?\"'
@@ -112,15 +113,25 @@ class BasicParser(Parser):
     def expr(self, p):
         return ('num', p.NUMBER)
 
+def open_file(filename):
+    data = open(filename, "r").read()
+    return data
+
 if __name__ == '__main__':
     lexer = BasicLexer()
     parser = BasicParser()
     env = {}
-    while True:
-        try:
-            text = input('basic > ')
-        except EOFError:
-            break
-        if text:
-            tree = parser.parse(lexer.tokenize(text))
-            print(tree)
+    if len(argv) > 1:
+        data = open_file(argv[1])
+        lex = lexer.tokenize(data)
+        for token in lex:
+            print(token)
+    else:
+        while True:
+            try:
+                text = input('sundalang » ')
+            except EOFError:
+                break
+            if text:
+                tree = parser.parse(lexer.tokenize(text))
+                print(tree)
