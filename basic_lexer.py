@@ -12,7 +12,7 @@ class BasicLexer(Lexer):
     THEN = r'SATULUNYA '
     ELSE = r'SEDANGKEUN'
     FOR = r'KEUR'
-    FUN = r'FUN'
+    FUN = r'PUNGSI'
     TO = r'KA'
     ARROW = r'->'
     NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'

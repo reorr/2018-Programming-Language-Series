@@ -10,7 +10,7 @@ class BasicLexer(Lexer):
 
     # Define tokens
     IF = r'UPAMI'
-    THEN = r'SATULUNYA '
+    THEN = r'SATULUNYA'
     ELSE = r'SEDANGKEUN'
     FOR = r'KEUR'
     FUN = r'FUN'
@@ -124,8 +124,8 @@ if __name__ == '__main__':
     if len(argv) > 1:
         data = open_file(argv[1])
         lex = lexer.tokenize(data)
-        for token in lex:
-            print(token)
+        tree = parser.parse(lexer.tokenize(data))
+        print(tree)
     else:
         while True:
             try:
