@@ -1,38 +1,5 @@
-from sly import Lexer
-from sys import *
 from sly import Parser
-
-class BasicLexer(Lexer):
-    tokens = { NAME, NUMBER, STRING, IF, THEN, ELSE, FOR, FUN, TO, ARROW, EQEQ }
-    ignore = '\t '
-
-    literals = { '=', '+', '-', '/', '*', '(', ')', ',', ';' }
-
-    # Define tokens
-    IF = r'UPAMI'
-    THEN = r'SATULUNYA'
-    ELSE = r'SEDANGKEUN'
-    FOR = r'KEUR'
-    FUN = r'FUN'
-    TO = r'KA'
-    ARROW = r'->'
-    NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
-    STRING = r'\".*?\"'
-
-    EQEQ = r'=='
-
-    @_(r'\d+')
-    def NUMBER(self, t):
-        t.value = int(t.value)
-        return t
-
-    @_(r'#.*')
-    def COMMENT(self, t):
-        pass
-
-    @_(r'\n+')
-    def newline(self,t ):
-        self.lineno = t.value.count('\n')
+from sundalang.basiclexer import BasicLexer
 
 class BasicParser(Parser):
     tokens = BasicLexer.tokens
@@ -112,26 +79,3 @@ class BasicParser(Parser):
     @_('NUMBER')
     def expr(self, p):
         return ('num', p.NUMBER)
-
-def open_file(filename):
-    data = open(filename, "r").read()
-    return data
-
-if __name__ == '__main__':
-    lexer = BasicLexer()
-    parser = BasicParser()
-    env = {}
-    if len(argv) > 1:
-        data = open_file(argv[1])
-        lex = lexer.tokenize(data)
-        tree = parser.parse(lexer.tokenize(data))
-        print(tree)
-    else:
-        while True:
-            try:
-                text = input('sundalang » ')
-            except EOFError:
-                break
-            if text:
-                tree = parser.parse(lexer.tokenize(text))
-                print(tree)
