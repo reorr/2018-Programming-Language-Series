@@ -1,3 +1,5 @@
+import re
+
 class BasicExecute:
 
     def __init__(self, tree, env):
@@ -9,6 +11,11 @@ class BasicExecute:
             print(result)
 
     def walkTree(self, node):
+
+        def removeQuote(text):
+            if type(text) is str:
+                text = text.replace('a', "")
+            return text
 
         if isinstance(node, int):
             return node
@@ -58,6 +65,9 @@ class BasicExecute:
             return self.walkTree(node[1]) * self.walkTree(node[2])
         elif node[0] == 'div':
             return self.walkTree(node[1]) / self.walkTree(node[2])
+
+        if node[0] == 'print':
+            return removeQuote(self.walkTree(node[1]))
 
         if node[0] == 'var_assign':
             self.env[node[1]] = self.walkTree(node[2])

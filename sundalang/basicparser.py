@@ -36,6 +36,14 @@ class BasicParser(Parser):
     def condition(self, p):
         return ('condition_eqeq', p.expr0, p.expr1)
 
+    @_('PRINT expr')
+    def statement(self, p):
+        return ('print', p.expr)
+
+    @_('PRINT STRING')
+    def statement(self, p):
+        return ('print', p.STRING)
+
     @_('var_assign')
     def statement(self, p):
         return p.var_assign

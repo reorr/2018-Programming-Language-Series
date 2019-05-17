@@ -1,7 +1,7 @@
 from sly import Lexer
 
 class BasicLexer(Lexer):
-    tokens = { NAME, NUMBER, STRING, IF, THEN, ELSE, FOR, FUN, TO, ARROW, EQEQ }
+    tokens = { NAME, NUMBER, STRING, IF, THEN, ELSE, FOR, FUN, TO, ARROW, EQEQ, PRINT }
     ignore = '\t '
 
     literals = { '=', '+', '-', '/', '*', '(', ')', ',', ';' }
@@ -13,6 +13,7 @@ class BasicLexer(Lexer):
     FOR = r'KEUR'
     FUN = r'PUNGSI'
     TO = r'KA'
+    PRINT = r'CETAK'
     ARROW = r'->'
     NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
     STRING = r'\".*?\"'
