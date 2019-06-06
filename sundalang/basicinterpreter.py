@@ -14,7 +14,8 @@ class BasicExecute:
 
         def removeQuote(text):
             if type(text) is str:
-                text = text.replace('a', "")
+                text = text[1:-1]
+                print(text)
             return text
 
         if isinstance(node, int):
