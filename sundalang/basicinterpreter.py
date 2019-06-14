@@ -65,7 +65,7 @@ class BasicExecute:
         elif node[0] == 'mul':
             return self.walkTree(node[1]) * self.walkTree(node[2])
         elif node[0] == 'div':
-            return self.walkTree(node[1]) / self.walkTree(node[2])
+            return int(self.walkTree(node[1]) / self.walkTree(node[2]))
 
         if node[0] == 'print':
             return removeQuote(self.walkTree(node[1]))
