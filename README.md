@@ -40,8 +40,7 @@ sundalang »
 
 You can also feed plain text file to main.py
 
-### Example
-`example.snd`
+Create `example.snd`
 ```
 b=2
 a=8
